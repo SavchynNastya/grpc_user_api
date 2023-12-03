@@ -1,0 +1,143 @@
+syntax = "proto3";
+
+
+service UserService {
+    // USERS
+  rpc CreateUsersRecord (CreateUsersRequest) returns (CreateUsersResponse);
+  rpc ReadUsersRecord (ReadUsersRequest) returns (ReadUsersResponse);
+  rpc UpdateUsersRecord (UpdateUsersRequest) returns (UpdateUsersResponse);
+  rpc DeleteUsersRecord (DeleteUsersRequest) returns (DeleteUsersResponse);
+  rpc ResetUserAuthRecord (ResetUserAuthRequest) returns (ResetUserAuthResponse);
+  rpc ResetAdminAuthRecord (ResetAdminAuthRequest) returns (ResetAdminAuthResponse);
+  rpc CheckAdminRecord (CheckAdminRequest) returns (CheckAdminResponse);
+  rpc UpdateUserStatusRecord (UpdateUserStatusRequest) returns (UpdateUserStatusResponse);
+}
+
+message CreateUsersRequest {
+  int64 admin_id = 1;
+  string admin_hash = 2;
+  string user_username = 3;
+  string user_email = 4;
+}
+
+message CreateUsersResponse {
+  int64 status = 1;
+  string message = 2;
+  string key_api = 3;
+}
+
+
+message UpdateUserStatusRequest {
+  int64 admin_id = 1;
+  string admin_hash = 2;
+  string user_username = 3;
+  int32 status = 4;
+}
+
+message UpdateUserStatusResponse {
+  int64 status = 1;
+  string message = 2;
+}
+
+
+
+message CheckAdminRequest {
+  int64 admin_id = 1;
+  string admin_hash = 2;
+}
+
+message CheckAdminResponse {
+  int64 status = 1;
+  string message = 2;
+}
+
+
+message ReadUsersRequest {
+  repeated int64 id = 1;
+  repeated string name = 2;
+  repeated string username = 3;
+  repeated string first_email = 4;
+  repeated string second_email = 5;
+  repeated string key = 6;
+  repeated string hash = 7;
+  repeated string salt = 8;
+  repeated int32 status = 9;
+  repeated string description = 10;
+  repeated string timestamp = 11;
+}
+
+message ReadUsersResponse {
+  int64 status = 1;
+  string message = 2;
+  repeated UserObject data = 3;
+}
+
+message UserObject{
+  int64 id = 1;
+  string name = 2;
+  string username = 3;
+  string first_email = 4;
+  string second_email = 5;
+  bytes key = 6;
+  bytes hash = 7;
+  string salt = 8;
+  int32 status = 9;
+  string description = 10;
+  string timestamp = 11;
+}
+
+
+message UpdateUsersRequest {
+  int64 id = 1;
+  string hash = 2;
+  string first_email = 3;
+  string second_email = 4;
+  string username = 5;
+  string description = 6;
+}
+
+message UpdateUsersResponse {
+  int64 status = 1;
+  string message = 2;
+}
+
+
+message DeleteUsersRequest {
+  int64 admin_id = 1;
+  string admin_hash = 2;
+  string user_name = 3;
+  string user_username = 4;
+  bool with_data = 5;
+  string reason = 6;
+}
+
+message DeleteUsersResponse {
+  int64 status = 1;
+  string message = 2;
+}
+
+
+message ResetUserAuthRequest {
+  int64 id = 1;
+  string username = 2;
+  string hash = 3;
+}
+
+message ResetUserAuthResponse {
+  int64 status = 1;
+  string message = 2;
+}
+
+
+message ResetAdminAuthRequest {
+  int64 admin_id = 1;
+  string admin_hash = 2;
+  string user_name = 3;
+  string user_username = 4;
+  string reason = 5;
+}
+
+message ResetAdminAuthResponse {
+  int64 status = 1;
+  string message = 2;
+}

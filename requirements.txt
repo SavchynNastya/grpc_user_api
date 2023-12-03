@@ -1,0 +1,9 @@
+grpcio 
+grpcio-tools
+python-dotenv
+sqlalchemy[asyncio]
+pymssql==2.2.10
+cryptography
+grpcio-testing==1.59.2
+Protobuf
+pyodbc==5.0.1
